@@ -2,11 +2,13 @@ const {Shop, Item} = require("../src/gilded_rose");
 
 describe("Gilded Rose", function() {
   let shopBrieNormal;
-  let shopBrieExpired;
   let shopBrieBestQuality;
+  let shopSulfurasNormal;
+  let shopSulfurasBestQuality;
   beforeEach(function(){
     shopBrieNormal = new Shop([new Item("Brie", 10, 10)]);
     shopBrieBestQuality = new Shop([new Item("Brie", -5, 50)])
+    shopSulfurasNormal = new Shop([new Item("Sulfuras, Hand of Ragnaros", 0, 10)])
   });
 
   describe("updating Brie quality", function(){
@@ -17,6 +19,13 @@ describe("Gilded Rose", function() {
     it('Does not increase the quality if quality is already 50', function(){
       shopBrieBestQuality.updateQuality()
       expect(shopBrieBestQuality.items[0]).toEqual({"name": "Brie", "quality": 50, "sellIn": -6})
+    });
+  });
+
+  describe("updating Sulfuras quality", function(){
+    it('Increases by 1 the value of quality and decreases by one the sell in in normal conditions', function(){
+      shopSulfurasNormal.updateQuality()
+      expect(shopSulfurasNormal.items[0]).toEqual({"name": "Sulfuras, Hand of Ragnaros", "quality": 10, "sellIn": 0})
     });
   });
 
