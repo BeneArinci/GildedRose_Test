@@ -10,7 +10,7 @@ describe("Gilded Rose", function() {
     shopBrieNormal = new Shop([new Item("Brie", 10, 10)]);
     shopBrieBestQuality = new Shop([new Item("Brie", -5, 50)])
     shopSulfuras = new Shop([new Item("Sulfuras", 0, 10)])
-    shopPassesNormal = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 12, 10)])
+    shopPassesNormal = new Shop([new Item("Backstage passes", 12, 10)])
 
   });
 
@@ -35,7 +35,7 @@ describe("Gilded Rose", function() {
   describe("updating Sulfuras quality", function(){
     it('in normal conditions, adds 1 to quality and reduces by 1 the sellIn', function(){
       shopPassesNormal.updateQuality()
-      expect(shopPassesNormal.items[0]).toEqual({"name": "Backstage passes to a TAFKAL80ETC concert", "quality": 11, "sellIn": 11})
+      expect(shopPassesNormal.items[0]).toEqual({"name": "Backstage passes", "quality": 11, "sellIn": 11})
     });
   });
 
