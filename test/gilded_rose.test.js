@@ -13,6 +13,7 @@ describe("Gilded Rose", function() {
     shopSulfuras = new Shop([new Item("Sulfuras", 0, 10)])
     shopPassesNormal = new Shop([new Item("Backstage passes", 12, 10)])
     shopPasses10days = new Shop([new Item("Backstage passes", 10, 10)])
+    shopPasses5days = new Shop([new Item("Backstage passes", 5, 10)])
 
   });
 
@@ -39,9 +40,13 @@ describe("Gilded Rose", function() {
       shopPassesNormal.updateQuality()
       expect(shopPassesNormal.items[0]).toEqual({"name": "Backstage passes", "quality": 11, "sellIn": 11})
     });
-    it('when sellin <= 10 days from the concert, adds 2 to quality and reduces by 1 the sellIn', function(){
+    it('when sellin <= 10 (days from the concert), adds 2 to quality and reduces by 1 the sellIn', function(){
       shopPasses10days.updateQuality()
       expect(shopPasses10days.items[0]).toEqual({"name": "Backstage passes", "quality": 12, "sellIn": 9})
+    });
+    it('when sellin <=5 (days from the concert), adds 3 to quality and reduces by 1 the sellIn', function(){
+      shopPasses5days.updateQuality()
+      expect(shopPasses5days.items[0]).toEqual({"name": "Backstage passes", "quality": 13, "sellIn": 4})
     });
   });
 
