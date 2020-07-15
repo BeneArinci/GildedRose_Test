@@ -3,12 +3,15 @@ const {Shop, Item} = require("../src/gilded_rose");
 describe("Gilded Rose", function() {
   let shopBrieNormal;
   let shopBrieBestQuality;
-  let shopSulfurasNormal;
-  let shopSulfurasBestQuality;
+  let shopSulfuras;
+  let shopPassesNormal;
+ 
   beforeEach(function(){
     shopBrieNormal = new Shop([new Item("Brie", 10, 10)]);
     shopBrieBestQuality = new Shop([new Item("Brie", -5, 50)])
-    shopSulfurasNormal = new Shop([new Item("Sulfuras", 0, 10)])
+    shopSulfuras = new Shop([new Item("Sulfuras", 0, 10)])
+    shopPassesNormal = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 12, 10)])
+
   });
 
   describe("updating Brie quality", function(){
@@ -23,10 +26,19 @@ describe("Gilded Rose", function() {
   });
 
   describe("updating Sulfuras quality", function(){
-    it('Increases by 1 the value of quality and decreases by one the sell in in normal conditions', function(){
-      shopSulfurasNormal.updateQuality()
-      expect(shopSulfurasNormal.items[0]).toEqual({"name": "Sulfuras", "quality": 10, "sellIn": 0})
+    it('does not modify their quality nor the selling value', function(){
+      shopSulfuras.updateQuality()
+      expect(shopSulfuras.items[0]).toEqual({"name": "Sulfuras", "quality": 10, "sellIn": 0})
     });
   });
+
+  describe("updating Sulfuras quality", function(){
+    it('in normal conditions, adds 1 to quality and reduces by 1 the sellIn', function(){
+      shopPassesNormal.updateQuality()
+      expect(shopPassesNormal.items[0]).toEqual({"name": "Backstage passes to a TAFKAL80ETC concert", "quality": 11, "sellIn": 11})
+    });
+  });
+
+
 
 });
