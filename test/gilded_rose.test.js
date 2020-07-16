@@ -6,6 +6,7 @@ describe("Gilded Rose", function() {
   let shopSulfuras;
   let shopPassesNormal;
   let shopPasses10days;
+  let shopPassesExpired;
  
   beforeEach(function(){
     shopBrieNormal = new Shop([new Item("Brie", 10, 10)]);
@@ -14,7 +15,7 @@ describe("Gilded Rose", function() {
     shopPassesNormal = new Shop([new Item("Backstage passes", 12, 10)])
     shopPasses10days = new Shop([new Item("Backstage passes", 10, 10)])
     shopPasses5days = new Shop([new Item("Backstage passes", 5, 10)])
-
+    shopPassesExpired = new Shop([new Item("Backstage passes", 0, 30)])
   });
 
   describe("updating Brie quality", function(){
@@ -48,7 +49,14 @@ describe("Gilded Rose", function() {
       shopPasses5days.updateQuality()
       expect(shopPasses5days.items[0]).toEqual({"name": "Backstage passes", "quality": 13, "sellIn": 4})
     });
+    it('when sellin <=0, quality drops to 0', function(){
+      shopPassesExpired.updateQuality()
+      expect(shopPassesExpired.items[0]).toEqual({"name": "Backstage passes", "quality": 0, "sellIn": -1})
+    });
+
   });
+
+
 
 
 
