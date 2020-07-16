@@ -8,55 +8,21 @@ class Shop {
   }
   updateQuality() {
     this.items.forEach(function(item) {
-      if (this._isBrie(item) == false && this._isBackstagePasses(item) == false) {
-        if (this._isNotMinQuality(item)) {
-          if (this._isSulfuras(item) == false) {
-            item.quality --;
-          }
-        }
+      if (this._isBrie(item)) {
+        this._updateBrieQuality(item);
+      } else if (this._isSulfuras(item)) {
+        this._updateSulfurasQuality(item);
+      } else if (this._isBackstagePasses(item)) {
+        this._updateBackstagePass(item);
       } else {
-        if (this._isNotMaxQuality(item)) {
-          item.quality ++;
-          if (this._isBackstagePasses(item)) {
-            if (item.sellIn < 11) {
-              if (this._isNotMaxQuality(item)) {
-                item.quality ++;
-              }
-            }
-            if (item.sellIn < 6) {
-              if (this._isNotMaxQuality(item)) {
-                item.quality ++;
-              }
-            }
-          }
-        }
+        this._updateOtherProducts(item)
       }
-      if (this._isSulfuras(item) == false){
-        item.sellIn --;
-      }
-      if (item.sellIn < 0) {
-        if (this._isBrie(item) == false) {
-          if (this._isBackstagePasses(item) == false) {
-            if (this._isNotMinQuality(item)) {
-              if (this._isSulfuras(item) == false) {
-                item.quality --;
-              }
-            }
-          } else {
-            item.quality -= item.quality;
-          }
-        } else {
-          if (this._isNotMaxQuality(item)) {
-            item.quality ++;
-          }
-        }
-      }
-  }.bind(this));
+    }.bind(this));
     return this.items;
   }
 
   _updateBrieQuality(item) {
-    if (item.quality == this.MAX_QUALITY() == false) {
+    if (this._isNotMaxQuality(item)) {
       item.quality ++
     }
     item.sellIn --
@@ -68,11 +34,11 @@ class Shop {
 
   _updateBackstagePass(item) {
     if (this._isNotMaxQuality(item) && item.sellIn > 0) {
-      if (item.sellIn <= 5 && item.sellIn > 0) {
-        item.quality += 3
-        } if (item.sellIn <= 10) {
+      if (item.sellIn < 6) {
+        item.quality = item.quality + 3
+        } else if (item.sellIn <= 10 && item.sellIn > 5) {
         item.quality += 2
-      } else {
+        } else {
         item.quality ++
       }
     }
