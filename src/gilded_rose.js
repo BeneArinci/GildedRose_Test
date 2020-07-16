@@ -24,11 +24,18 @@ class Shop {
   }
 
   _updateConjuredQuality(item) {
-    if (this._isExpired(item)){
-      item.quality -= 4
-    } else {item.quality -= 2}
-    ;
-    item.sellIn -= 1;
+    if (this._isNotMinQuality(item)) {
+      if(this._isExpired(item)){
+        if(this._isQualityGettingNegative(item) == false) {
+          item.quality -= 4;
+        } else {item.quality = 0}
+      } else if (this._isExpired(item) == false) {
+        if(this._isQualityGettingNegative(item) == false) {
+          item.quality -= 2;
+        } else {item.quality = 0}
+      }
+    }
+    item.sellIn --
   }
 
   _updateBrieQuality(item) {
@@ -82,7 +89,7 @@ class Shop {
   }
 
   _isQualityGettingNegative(item) {
-    return item.quality - 1 <= 0 || item.quality -2 <=0
+    return item.quality - 1 <= 0 || item.quality -2 <=0 || item.quality -4 <=0
   }
 
   _isExpired(item) {
