@@ -51,8 +51,14 @@ class Shop {
   _updateOtherProducts(item) {
     if (this._isNotMinQuality(item)) {
       if(this._isExpired(item)){
-      item.quality -= 2
-      } else {item.quality --}
+        if(this._isQualityGettingNegative(item) == false) {
+          item.quality -= 2;
+        } else {item.quality = 0}
+      } else if (this._isExpired(item) == false) {
+        if(this._isQualityGettingNegative(item) == false) {
+          item.quality --;
+        } else {item.quality = 0}
+      }
     }
     item.sellIn --
   }
@@ -63,6 +69,10 @@ class Shop {
 
   _isNotMinQuality(item) {
     return item.quality > this.MIN_QUALITY
+  }
+
+  _isQualityGettingNegative(item) {
+    return item.quality - 1 <= 0 || item.quality -2 <=0
   }
 
   _isExpired(item) {

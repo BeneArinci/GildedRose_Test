@@ -24,6 +24,7 @@ describe("Gilded Rose", function() {
     shopPassesBestQuality = new Shop([new Item("Backstage passes", 5, 50)]);
     shopOtherItem = new Shop([new Item("Other Item", 10, 10)]);
     shopOtherItemExpired = new Shop([new Item("Other Item", 0, 10)]);
+    shopOtherItemLowQuality = new Shop([new Item("Other Item", 0, 0)])
     shopMultipleItems = new Shop([new Item("Other Item", 0, 10), new Item("Brie", 10, 10), new Item("Sulfuras", 0, 10)]);
   });
 
@@ -76,6 +77,10 @@ describe("Gilded Rose", function() {
     it('when the item is expired, reduces quality by 2 and sellIn by 1', function(){
       shopOtherItemExpired.updateQuality();
       expect(shopOtherItemExpired.items[0]).toEqual({"name": "Other Item", "quality": 8, "sellIn": -1});
+    });
+    it('the quality of an item never go below the minimum of 0', function(){
+      shopOtherItemLowQuality.updateQuality();
+      expect(shopOtherItemLowQuality.items[0]).toEqual({"name": "Other Item", "quality": 0, "sellIn": -1})
     });
   });
 
