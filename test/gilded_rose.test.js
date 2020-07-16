@@ -73,10 +73,20 @@ describe("Gilded Rose", function() {
       shopOtherItemExpired.updateQuality();
       expect(shopOtherItemExpired.items[0]).toEqual({"name": "Other Item", "quality": 8, "sellIn": -1});
     });
+    it('when the item is expired, reduces quality by 2 and sellIn by 1, extra test', function(){
+      shopOtherItemExpired = new Shop([new Item("Other Item", -2, 2)]);
+      shopOtherItemExpired.updateQuality();
+      expect(shopOtherItemExpired.items[0]).toEqual({"name": "Other Item", "quality": 0, "sellIn": -3});
+    });
     it('the quality of an item never go below the minimum of 0', function(){
       shopOtherItemLowQuality = new Shop([new Item("Other Item", -1, 1)]);
       shopOtherItemLowQuality.updateQuality();
       expect(shopOtherItemLowQuality.items[0]).toEqual({"name": "Other Item", "quality": 0, "sellIn": -2})
+    });
+    it('the quality of an item never go below the minimum of 0, extra test', function(){
+      shopOtherItemLowQuality = new Shop([new Item("Other Item", 5, 1)]);
+      shopOtherItemLowQuality.updateQuality();
+      expect(shopOtherItemLowQuality.items[0]).toEqual({"name": "Other Item", "quality": 0, "sellIn": 4})
     });
   });
 
