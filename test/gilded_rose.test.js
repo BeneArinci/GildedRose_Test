@@ -45,7 +45,7 @@ describe("Gilded Rose", function() {
     });
   });
 
-  describe("updating Sulfuras quality", function(){
+  describe("updating Backstage Passes quality", function(){
     it('in normal conditions, adds 1 to quality and reduces by 1 the sellIn', function(){
       shopPassesNormal.updateQuality();
       expect(shopPassesNormal.items[0]).toEqual({"name": "Backstage passes", "quality": 11, "sellIn": 11});

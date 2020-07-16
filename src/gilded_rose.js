@@ -55,7 +55,27 @@ class Shop {
     return this.items;
   }
 
+  _updateBrieQuality(item) {
+    if (item.quality == this.MAX_QUALITY() == false) {
+      item.quality ++
+    }
+    item.sellIn --
+  }
 
+  _updateSulfurasQuality(item) {
+    item = item 
+  }
+
+  _updateBackstagePass(item) {
+    if (item.sellIn <= 10) {
+      item.quality = item.quality + 2
+    } if (item.sellIn <= 5 && item.sellIn > 0) {
+      item.quality = item.quality + 3
+    } else {
+      item.sellIn = 0
+    }
+    item.sellIn --
+  }
 
   _isNotMaxQuality(item) {
     return item.quality < this.MAX_QUALITY
