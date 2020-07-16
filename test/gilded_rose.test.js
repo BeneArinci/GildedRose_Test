@@ -86,10 +86,20 @@ describe("Gilded Rose", function() {
       shopConjured.updateQuality();
       expect(shopConjured.items[0]).toEqual({"name": "Conjured", "quality": 8, "sellIn": 4})
     });
+    it('reduces the quality by 2 if the item is not expired, extra test', function(){
+      shopConjured = new Shop([new Item("Conjured", 15, 2)]);
+      shopConjured.updateQuality();
+      expect(shopConjured.items[0]).toEqual({"name": "Conjured", "quality": 0, "sellIn": 14})
+    });
     it('reduces the quality by 4 if the item is expired', function(){
       shopConjuredExpired = new Shop([new Item("Conjured", -1, 10)])
       shopConjuredExpired.updateQuality();
       expect(shopConjuredExpired.items[0]).toEqual({"name": "Conjured", "quality": 6, "sellIn": -2})
+    });
+    it('reduces the quality by 4 if the item is expired, extra example', function(){
+      shopConjuredExpired = new Shop([new Item("Conjured", -2, 4)])
+      shopConjuredExpired.updateQuality();
+      expect(shopConjuredExpired.items[0]).toEqual({"name": "Conjured", "quality": 0, "sellIn": -3})
     });
     it('does not bring the quality above the minimum of 0', function(){
       shopConjured = new Shop([new Item("Conjured", 0, 1)])
