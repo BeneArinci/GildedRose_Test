@@ -14,11 +14,18 @@ class Shop {
         this._updateSulfurasQuality(item);
       } else if (this._isBackstagePasses(item)) {
         this._updateBackstagePass(item);
+      } else if (this._isConjured(item)) {
+        this._updateConjuredQuality(item);
       } else {
         this._updateOtherProducts(item)
       }
     }.bind(this));
     return this.items;
+  }
+
+  _updateConjuredQuality(item) {
+    item.quality -=2;
+    item.sellIn -=1;
   }
 
   _updateBrieQuality(item) {
@@ -79,6 +86,9 @@ class Shop {
     return item.sellIn <= 0 
   }
 
+  _isConjured(item) {
+    return item.name == "Conjured"
+  }
   _isBrie(item) {
     return item.name == "Brie"
   }
