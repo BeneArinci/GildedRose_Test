@@ -8,7 +8,7 @@ class Shop {
   }
   updateQuality() {
     this.items.forEach(function(item) {
-      if (this._isBrie(item) == false && item.name != 'Backstage passes') {
+      if (this._isBrie(item) == false && this._isBackstagePasses(item) == false) {
         if (this._isNotMinQuality(item)) {
           if (this._isSulfuras(item) == false) {
             item.quality --;
@@ -17,7 +17,7 @@ class Shop {
       } else {
         if (this._isNotMaxQuality(item)) {
           item.quality ++;
-          if (item.name == 'Backstage passes') {
+          if (this._isBackstagePasses(item)) {
             if (item.sellIn < 11) {
               if (this._isNotMaxQuality(item)) {
                 item.quality ++;
@@ -36,7 +36,7 @@ class Shop {
       }
       if (item.sellIn < 0) {
         if (this._isBrie(item) == false) {
-          if (item.name != 'Backstage passes') {
+          if (this._isBackstagePasses(item) == false) {
             if (this._isNotMinQuality(item)) {
               if (this._isSulfuras(item) == false) {
                 item.quality --;
@@ -71,6 +71,10 @@ class Shop {
 
   _isSulfuras(item) {
     return item.name == "Sulfuras"
+  }
+
+  _isBackstagePasses(item) {
+    return item.name == "Backstage passes"
   }
   
 }
