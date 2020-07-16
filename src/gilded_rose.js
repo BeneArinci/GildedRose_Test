@@ -33,7 +33,7 @@ class Shop {
   }
 
   _updateBackstagePass(item) {
-    if (this._isNotMaxQuality(item) && item.sellIn > 0) {
+    if (this._isNotMaxQuality(item) && this._isExpired(item) == false) {
       if (item.sellIn < 6) {
         item.quality = item.quality + 3
         } else if (item.sellIn <= 10 && item.sellIn > 5) {
@@ -49,11 +49,10 @@ class Shop {
   }
 
   _updateOtherProducts(item) {
-    if (this._isNotMinQuality(item) && item.sellIn > 0){
-      item.quality --
-    }
-    if (this._isNotMinQuality(item) && item.sellIn <= 0){
+    if (this._isNotMinQuality(item)) {
+      if(this._isExpired(item)){
       item.quality -= 2
+      } else {item.quality --}
     }
     item.sellIn --
   }
@@ -64,6 +63,10 @@ class Shop {
 
   _isNotMinQuality(item) {
     return item.quality > this.MIN_QUALITY
+  }
+
+  _isExpired(item) {
+    return item.sellIn <= 0 
   }
 
   _isBrie(item) {
