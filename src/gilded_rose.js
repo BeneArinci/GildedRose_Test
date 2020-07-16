@@ -67,12 +67,27 @@ class Shop {
   }
 
   _updateBackstagePass(item) {
-    if (item.sellIn <= 10) {
-      item.quality = item.quality + 2
-    } if (item.sellIn <= 5 && item.sellIn > 0) {
-      item.quality = item.quality + 3
-    } else {
-      item.sellIn = 0
+    if (this._isNotMaxQuality(item) && item.sellIn > 0) {
+      if (item.sellIn <= 5 && item.sellIn > 0) {
+        item.quality += 3
+        } if (item.sellIn <= 10) {
+        item.quality += 2
+      } else {
+        item.quality ++
+      }
+    }
+    if (item.sellIn == 0){
+      item.quality = 0
+    }
+    item.sellIn --
+  }
+
+  _updateOtherProducts(item) {
+    if (this._isNotMinQuality(item) && item.sellIn > 0){
+      item.quality --
+    }
+    if (this._isNotMinQuality(item) && item.sellIn <= 0){
+      item.quality -= 2
     }
     item.sellIn --
   }
