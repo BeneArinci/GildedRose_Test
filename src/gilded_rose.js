@@ -4,12 +4,12 @@ class Shop {
   constructor(items=[]){
     this.items = items;
     this.MAX_QUALITY = 50
+    this.MIN_QUALITY = 0
   }
-
   updateQuality() {
     this.items.forEach(function(item) {
       if (item.name != 'Brie' && item.name != 'Backstage passes') {
-        if (item.quality > 0) {
+        if (this._isNotMinQuality(item)) {
           if (item.name != 'Sulfuras') {
             item.quality --;
           }
@@ -37,7 +37,7 @@ class Shop {
       if (item.sellIn < 0) {
         if (item.name != 'Brie') {
           if (item.name != 'Backstage passes') {
-            if (item.quality > 0) {
+            if (this._isNotMinQuality(item)) {
               if (item.name != 'Sulfuras') {
                 item.quality --;
               }
@@ -54,10 +54,16 @@ class Shop {
   }.bind(this));
     return this.items;
   }
+
+
+  
   _isNotMaxQuality(item) {
     return item.quality < this.MAX_QUALITY
   }
 
+  _isNotMinQuality(item) {
+    return item.quality > this.MIN_QUALITY
+  }
 }
 
 
