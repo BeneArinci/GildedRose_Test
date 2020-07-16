@@ -8,7 +8,7 @@ class Shop {
   }
   updateQuality() {
     this.items.forEach(function(item) {
-      if (item.name != 'Brie' && item.name != 'Backstage passes') {
+      if (this._isBrie(item) == false && item.name != 'Backstage passes') {
         if (this._isNotMinQuality(item)) {
           if (item.name != 'Sulfuras') {
             item.quality --;
@@ -35,7 +35,7 @@ class Shop {
         item.sellIn --;
       }
       if (item.sellIn < 0) {
-        if (item.name != 'Brie') {
+        if (this._isBrie(item) == false) {
           if (item.name != 'Backstage passes') {
             if (this._isNotMinQuality(item)) {
               if (item.name != 'Sulfuras') {
@@ -56,13 +56,17 @@ class Shop {
   }
 
 
-  
+
   _isNotMaxQuality(item) {
     return item.quality < this.MAX_QUALITY
   }
 
   _isNotMinQuality(item) {
     return item.quality > this.MIN_QUALITY
+  }
+
+  _isBrie(item) {
+    return item.name == "Brie"
   }
 }
 
