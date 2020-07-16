@@ -24,8 +24,11 @@ class Shop {
   }
 
   _updateConjuredQuality(item) {
-    item.quality -=2;
-    item.sellIn -=1;
+    if (this._isExpired(item)){
+      item.quality -= 4
+    } else {item.quality -= 2}
+    ;
+    item.sellIn -= 1;
   }
 
   _updateBrieQuality(item) {
