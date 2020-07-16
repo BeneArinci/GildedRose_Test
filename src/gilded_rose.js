@@ -10,7 +10,7 @@ class Shop {
     this.items.forEach(function(item) {
       if (this._isBrie(item) == false && item.name != 'Backstage passes') {
         if (this._isNotMinQuality(item)) {
-          if (item.name != 'Sulfuras') {
+          if (this._isSulfuras(item) == false) {
             item.quality --;
           }
         }
@@ -31,14 +31,14 @@ class Shop {
           }
         }
       }
-      if (item.name != 'Sulfuras') {
+      if (this._isSulfuras(item) == false){
         item.sellIn --;
       }
       if (item.sellIn < 0) {
         if (this._isBrie(item) == false) {
           if (item.name != 'Backstage passes') {
             if (this._isNotMinQuality(item)) {
-              if (item.name != 'Sulfuras') {
+              if (this._isSulfuras(item) == false) {
                 item.quality --;
               }
             }
@@ -68,6 +68,11 @@ class Shop {
   _isBrie(item) {
     return item.name == "Brie"
   }
+
+  _isSulfuras(item) {
+    return item.name == "Sulfuras"
+  }
+  
 }
 
 
