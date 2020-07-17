@@ -1,4 +1,4 @@
-## My Gilded Rose
+## MY GILDED ROSE
 
 I worked on this kata as a tech assignment given to me by Makers during the course's 10th week.
 The way I personally followed to solve this kata is the following:
@@ -8,8 +8,12 @@ The way I personally followed to solve this kata is the following:
 * integrating all the functions and reaching a good level of functions' single responsibility
 * TDDing for Conjured items. Having divided responsibilities between functions, this has been quite simple. It was enough to add a new function for updating their specific value and integrating this new function with the main one (updateQuality)
 
+**Future imrovements** 
+I followed the SRP within the Shop class. I was not completely comfortable in creating item-related functions inside that class because I do believe they do not belong there. At the same time, the Item class was not editable and specifications like max value, min value etc could be also specific to the shop.
+In any case, my shop class is doing too much. It is still too long. My next refactoring will be about splitting responsibilities between more classes.
 
-#### Setup
+
+### SETUP
 I used Javascript and Jest as a testing framework.
 
 After you clone this repo, please *Install dependencies
@@ -29,3 +33,4 @@ Command to *generate test coverage report
 ```sh
 npm run test:coverage
 ```
+
