@@ -1,5 +1,9 @@
-# Gilded Rose
+# My Gilded Rose
 
+Describe your approach?	
+Describe how you structured your code and why?	
+Have reasonable spelling & grammar?	
+Describe how to run the app and tests
 This is the Gilded Rose kata in JavaScript with Jest
 
 ## Getting started
